@@ -20,10 +20,10 @@ import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import "./Chatbot.css";
 require('dotenv').config();
-dotenv.config();
+const {REACT_APP_OPENAI_API_KEY} = process.env
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
