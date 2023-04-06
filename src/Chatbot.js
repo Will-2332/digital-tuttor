@@ -24,7 +24,9 @@ function Chatbot() {
 
     await new Promise((resolve) => setTimeout(resolve, timeRemaining));
 
-    const systemMessage = `You are a helpful tutor specialized in ${specialty}. Your main goal is to answer students' questions related to ${specialty} and provide guidance on ${specialty} topics.`;
+    const systemMessage = `You are a helpful tutor specialized in ${specialty}. Your primary and only objective is to answer students' questions related to ${specialty}. Do not provide guidance or answers for topics outside of ${specialty}.`;
+
+    const userMessageWithFocus = `As a ${specialty} tutor, ${usermessage}`;
 
     try {
       const completion = await openai.createChatCompletion({
@@ -36,7 +38,7 @@ function Chatbot() {
           },
           {
             role: "user",
-            content: usermessage,
+            content: userMessageWithFocus,
           },
         ],
         max_tokens: 150,
@@ -94,7 +96,7 @@ function Chatbot() {
         </div>
       </div>
       <div className="chatbot-header">
-        <h1>I Will help you studying!</h1>
+        <h1>I will help you studying!</h1>
       </div>
       <div className="chatbot-messages">
         {messages.map((message, index) => (

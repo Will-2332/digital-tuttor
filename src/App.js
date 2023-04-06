@@ -1,38 +1,17 @@
-// import logo from './logo.svg';
 // import './App.css';
-// import chat from './test';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
+// import logo from './logo2.svg';
 import React from 'react';
 import Chatbot from './Chatbot';
 
 function App() {
   return (
     <div className="App">
+      <head>
+        <title>Digital tutor Demonstration</title>
+        <link rel="icon" type="image/x-icon" href='logo.jpg'></link>
+      </head>
       <header className="App-header">
-        <h1>Digital Tuttor Demo</h1>
+        <h1>Digital Tutor Demo</h1>
       </header>
       <main>
         <Chatbot />
