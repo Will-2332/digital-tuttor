@@ -19,11 +19,9 @@
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import "./Chatbot.css";
-require('dotenv').config();
-const {REACT_APP_OPENAI_API_KEY} = process.env
 
 const configuration = new Configuration({
-  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
