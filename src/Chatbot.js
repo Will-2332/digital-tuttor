@@ -91,7 +91,11 @@ function Chatbot() {
             <option value="general">General</option>
             <option value="software development">Software Development</option>
             <option value="psychologyy">Psychology</option>
-            <option value="business administration">Business Administration</option>
+            <option value="mathematic">Mathematic</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            
           </select>
         </div>
       </div>
@@ -116,7 +120,7 @@ function Chatbot() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
         />
-        <button type="submit">Send</button>
+        <button type="submit" disabled={!input.trim()}>Send</button>
       </form>
     </div>
   );
