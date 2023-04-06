@@ -1,26 +1,7 @@
-// const { Configuration, OpenAIApi } = require("openai");
-// import {usermessage}
-
-// const configuration = new Configuration({
-//   apiKey: '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',
-// });
-// const openai = new OpenAIApi(configuration);
-
-// async function chat () {
-// const completion = await openai.createCompletion({
-//   model: "text-davinci-001",
-//   prompt: usermessage,
-// });
-// console.log(completion.data.choices[0].text);
-// }
-
-// export default chat;
-
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import "./Chatbot.css";
-// configs =require('dotenv').config();
-// API_KEY = configs.parsed.REACT_APP_OPENAI_API_KEY;
+
 let API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 const configuration = new Configuration({
@@ -31,34 +12,50 @@ const openai = new OpenAIApi(configuration);
 
 let lastRequestTime = 0;
 
-async function getBotResponse(usermessage) {
-  const currentTime = Date.now();
-  const elapsedTime = currentTime - lastRequestTime;
-  const timeRemaining = Math.max(0, 60000 - elapsedTime); // 60 seconds in milliseconds
-
-  await new Promise((resolve) => setTimeout(resolve, timeRemaining));
-
-  try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-001",
-      prompt: usermessage,
-    });
-
-    lastRequestTime = Date.now();
-
-    return completion.data.choices[0].text;
-  } catch (error) {
-    if (error.response && error.response.status === 429) {
-      throw new Error("API rate limit exceeded. Please try again later.");
-    } else {
-      throw error;
-    }
-  }
-}
-
 function Chatbot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [specialty, setSpecialty] = useState("general");
+
+  async function getBotResponse(usermessage) {
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - lastRequestTime;
+    const timeRemaining = Math.max(0, 60000 - elapsedTime); // 60 seconds in milliseconds
+
+    await new Promise((resolve) => setTimeout(resolve, timeRemaining));
+
+    const systemMessage = `You are a helpful tutor specialized in ${specialty}. Your main goal is to answer students' questions related to ${specialty} and provide guidance on ${specialty} topics.`;
+
+    try {
+      const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: systemMessage,
+          },
+          {
+            role: "user",
+            content: usermessage,
+          },
+        ],
+        max_tokens: 150,
+        n: 1,
+        temperature: 0.2,
+      });
+
+      lastRequestTime = Date.now();
+
+      const botMessage = completion.data.choices[0].message.content.trim();
+      return botMessage;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        throw new Error("API rate limit exceeded. Please try again later.");
+      } else {
+        throw error;
+      }
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,6 +78,21 @@ function Chatbot() {
 
   return (
     <div className="chatbot-container">
+      <div className="chatbot-container">
+        <div className="chatbot-specialty">
+          <label htmlFor="specialty">Select Tutor Specialty: </label>
+          <select
+            id="specialty"
+            value={specialty}
+            onChange={(event) => setSpecialty(event.target.value)}
+          >
+            <option value="general">General</option>
+            <option value="software development">Software Development</option>
+            <option value="psychologyy">Psychology</option>
+            <option value="business administration">Business Administration</option>
+          </select>
+        </div>
+      </div>
       <div className="chatbot-header">
         <h1>I Will help you studying!</h1>
       </div>
@@ -88,9 +100,8 @@ function Chatbot() {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`chatbot-message ${message.isBot ? "bot-message" : "user-message"} ${
-              message.isError ? "error-message" : ""
-            }`}
+            className={`chatbot-message ${message.isBot ? "bot-message" : "user-message"} ${message.isError ? "error-message" : ""
+              }`}
           >
             {message.text}
           </div>
