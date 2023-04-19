@@ -80,24 +80,21 @@ function Chatbot() {
 
   return (
     <div className="chatbot-container">
-      <div className="chatbot-container">
-        <div className="chatbot-specialty">
-          <label htmlFor="specialty">Select Tutor Specialty: </label>
-          <select
-            id="specialty"
-            value={specialty}
-            onChange={(event) => setSpecialty(event.target.value)}
-          >
-            <option value="general">General</option>
-            <option value="software development">Software Development</option>
-            <option value="psychologyy">Psychology</option>
-            <option value="mathematic">Mathematic</option>
-            <option value="chemistry">Chemistry</option>
-            <option value="history">History</option>
-            <option value="geography">Geography</option>
-            
-          </select>
-        </div>
+      <div className="chatbot-specialty">
+        <label htmlFor="specialty">Select Tutor Specialty: </label>
+        <select
+          id="specialty"
+          value={specialty}
+          onChange={(event) => setSpecialty(event.target.value)}
+        >
+          <option value="general">General</option>
+          <option value="software development">Software Development</option>
+          <option value="psychologyy">Psychology</option>
+          <option value="mathematic">Mathematic</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="history">History</option>
+          <option value="geography">Geography</option>
+        </select>
       </div>
       <div className="chatbot-header">
         <h1>I will help you studying!</h1>
@@ -124,6 +121,7 @@ function Chatbot() {
       </form>
     </div>
   );
+  
 }
 
 function PopUpWindow() {
@@ -134,7 +132,7 @@ function PopUpWindow() {
   };
 
   return (
-    <div>
+    <div className="chatbot-toggle-wrapper">
       <button onClick={toggleChatbot}>Toggle Chatbot</button>
       {showChatbot && (
         <div className="chatbot-popup">
@@ -144,5 +142,4 @@ function PopUpWindow() {
     </div>
   );
 }
-
 export default PopUpWindow;
