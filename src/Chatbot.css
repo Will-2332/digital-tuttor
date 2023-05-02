@@ -69,6 +69,19 @@
   .chat-input button {
     font-size: 14px;
   }
+
+  .chatbot-popup {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .chatbot-container {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .chatbot-toggle-wrapper {
