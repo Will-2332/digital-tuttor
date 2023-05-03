@@ -82,6 +82,15 @@
     width: 100%;
     height: 100%;
   }
+
+  .user-message,
+  .bot-message {
+    max-width: 90%;
+  }
+
+  .chatbot-messages {
+    padding: 5px;
+  }
 }
 
 .chatbot-toggle-wrapper {
