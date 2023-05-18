@@ -23,8 +23,6 @@ This project creates an interactive chatbot using React and the OpenAI API. User
 
 The application is designed to limit API calls to OpenAI's GPT-3.5-turbo model to prevent exceeding the rate limit. It also manages error states and displays appropriate error messages to the user.
 
-We'll fill in the other sections ("Project Structure", "Environment Variables", "Usage", "Contributing", "License") as we progress through this task.
-
 ---
 # Getting Started with Create React App
 
