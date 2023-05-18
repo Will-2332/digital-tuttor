@@ -161,7 +161,7 @@ Follow these steps to set up and run this project locally.
 
 2. **Setup Environment Variables**
 
-    Rename the `.env.sample` file to `.env` and replace `yourapikey` with your OpenAI API key.
+    Create a `.env` file and insert `yourapikey` your OpenAI API key.
 
     ```env
     REACT_APP_OPENAI_API_KEY=yourapikey
